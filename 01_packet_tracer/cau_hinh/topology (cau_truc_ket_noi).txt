@@ -1,0 +1,16 @@
+Internet
+    |
+PC_KhachHang
+100.100.100.2
+    |
+Router_Core
+    |
+Switch_Central
+    |
+    +-- Web_Server (VLAN 10)
+    |
+    +-- Database_Server (VLAN 20)
+    +-- PC_Admin (VLAN 20)
+    +-- NTP-SRV (VLAN 20)
+    +-- SYSLOG-SRV (VLAN 20)
+    +-- Backup_Server (VLAN 20)

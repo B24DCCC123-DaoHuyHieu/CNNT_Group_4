@@ -1,0 +1,12 @@
+THIẾT BỊ: Database_Server
+
+IP: 192.168.20.10
+Mask: 255.255.255.0
+Gateway: 192.168.20.1
+
+VLAN:
+20 (Internal)
+
+Vai trò:
+- Lưu trữ dữ liệu Core Banking
+- Chỉ cho phép truy cập từ vùng Internal hoặc Web_Server

@@ -1,0 +1,13 @@
+THIẾT BỊ: PC_Admin
+
+IP: 192.168.20.20
+Mask: 255.255.255.0
+Gateway: 192.168.20.1
+
+VLAN:
+20 (Internal)
+
+Vai trò:
+- Máy quản trị hệ thống
+- Kiểm tra kết nối
+- Quản lý các Server

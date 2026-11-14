@@ -1,0 +1,35 @@
+THIẾT BỊ: Router_Core
+
+Vai trò:
+- Định tuyến giữa các VLAN
+- Kết nối Internet
+- Thực thi ACL Firewall
+
+Interfaces:
+
+G0/1
+IP: 100.100.100.1/24
+Chức năng: Kết nối mạng Internet
+
+G0/0.10
+IP: 192.168.10.1/24
+VLAN: 10 (DMZ)
+Gateway cho Web_Server
+
+G0/0.20
+IP: 192.168.20.1/24
+VLAN: 20 (Internal)
+Gateway cho:
+- Database_Server
+- PC_Admin
+- Backup_Server
+- SYSLOG-SRV
+- NTP-SRV
+
+Router-on-a-Stick:
+- Encapsulation dot1Q VLAN 10
+- Encapsulation dot1Q VLAN 20
+
+ACL:
+- Cho phép Internet -> Web_Server (HTTP/HTTPS/Ping)
+- Chặn Internet -> Internal Network
