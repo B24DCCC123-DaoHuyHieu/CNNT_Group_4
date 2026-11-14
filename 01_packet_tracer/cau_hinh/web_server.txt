@@ -1,0 +1,12 @@
+THIẾT BỊ: Web_Server
+
+IP: 192.168.10.10
+Mask: 255.255.255.0
+Gateway: 192.168.10.1
+
+VLAN:
+10 (DMZ)
+
+Vai trò:
+- Cung cấp dịch vụ Web Banking
+- Tiếp nhận yêu cầu từ khách hàng Internet

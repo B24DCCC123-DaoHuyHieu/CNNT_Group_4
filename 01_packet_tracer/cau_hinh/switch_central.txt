@@ -1,0 +1,29 @@
+THIẾT BỊ: Switch_Central
+
+Vai trò:
+- Kết nối các thiết bị nội bộ
+- Quản lý VLAN
+
+VLAN:
+
+VLAN 10
+Tên: DMZ
+
+VLAN 20
+Tên: INTERNAL
+
+Port Assignment:
+
+Fa0/2 -> Web_Server -> VLAN 10
+
+Fa0/3 -> Database_Server -> VLAN 20
+
+Fa0/4 -> PC_Admin -> VLAN 20
+
+Fa0/5 -> SYSLOG-SRV -> VLAN 20
+
+Fa0/6 -> NTP-SRV -> VLAN 20
+
+Fa0/7 -> Backup_Server -> VLAN 20
+
+Gi0/1 -> Trunk -> Router_Core

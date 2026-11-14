@@ -1,0 +1,12 @@
+THIẾT BỊ: PC_KhachHang
+
+IP: 100.100.100.2
+Mask: 255.255.255.0
+Gateway: 100.100.100.1
+
+Vùng:
+Internet
+
+Vai trò:
+- Mô phỏng người dùng bên ngoài
+- Truy cập Web Banking

@@ -1,0 +1,19 @@
+THIẾT BỊ: SYSLOG-SRV
+
+IP: 192.168.20.40
+Mask: 255.255.255.0
+Gateway: 192.168.20.1
+
+Vai trò:
+- Thu thập nhật ký từ Router và Switch
+
+----------------------------
+
+THIẾT BỊ: NTP-SRV
+
+IP: 192.168.20.30
+Mask: 255.255.255.0
+Gateway: 192.168.20.1
+
+Vai trò:
+- Đồng bộ thời gian hệ thống

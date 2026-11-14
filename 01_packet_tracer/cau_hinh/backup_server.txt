@@ -1,0 +1,12 @@
+THIẾT BỊ: Backup_Server
+
+IP: 192.168.20.50
+Mask: 255.255.255.0
+Gateway: 192.168.20.1
+
+VLAN:
+20 (Internal)
+
+Vai trò:
+- Lưu trữ bản sao lưu Database
+- Phục vụ Backup / Restore

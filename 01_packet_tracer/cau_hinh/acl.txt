@@ -1,0 +1,62 @@
+THIẾT BỊ: Router_Core
+
+ACL 100
+access-list 100 permit tcp any host 192.168.10.10 eq 80
+access-list 100 permit tcp any host 192.168.10.10 eq 443
+access-list 100 permit icmp any host 192.168.10.10 echo
+access-list 100 deny ip any any
+
+
+
+Rule 1
+permit tcp any host 192.168.10.10 eq 80
+
+Ý nghĩa:
+Cho phép HTTP tới Web_Server
+
+--------------------------------
+
+Rule 2
+permit tcp any host 192.168.10.10 eq 443
+
+Ý nghĩa:
+Cho phép HTTPS tới Web_Server
+
+--------------------------------
+
+Rule 3
+permit icmp any host 192.168.10.10 echo
+
+Ý nghĩa:
+Cho phép Internet Ping Web_Server
+
+--------------------------------
+
+Rule 4
+deny ip any any
+
+Ý nghĩa:
+Chặn toàn bộ truy cập còn lại
+
+--------------------------------
+
+Apply:
+
+interface g0/1
+ip access-group 100 in
+
+--------------------------------
+
+Kết quả:
+
+Internet -> Web_Server
+PERMIT
+
+Internet -> Database_Server
+DENY
+
+Internet -> PC_Admin
+DENY
+
+Internet -> Backup_Server
+DENY
