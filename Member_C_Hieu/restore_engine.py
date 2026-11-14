@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Script 4: Quy trình 5 bước Phục hồi dữ liệu an toàn, Xác thực kép & Đo chỉ số RTO[cite: 2]
+Script 4: Quy trình 5 bước Phục hồi dữ liệu an toàn, Xác thực kép & Đo chỉ số RTO
 """
 
 import os
@@ -25,23 +25,23 @@ def run_restore_workflow(
     custom_kek: bytes = None
 ) -> dict:
     """
-    Thực thi 5 bước phục hồi chuẩn Mục 3.4B & đo thời gian RTO thực tế[cite: 2]
+    Thực thi 5 bước phục hồi chuẩn Mục 3.4B & đo thời gian RTO thực tế
     """
     start_time = time.perf_counter()
 
-    # Kiểm tra cơ chế Xác thực kép (Dual Authorization)[cite: 2]
+    # Kiểm tra cơ chế Xác thực kép (Dual Authorization)
     if operator_role != "Backup_Operator" or approver_role != "Security_Admin":
         send_syslog(
             "[KEY_ACCESS_DENIED]", 2, f"{operator_role}+{approver_role}",
             "Vi phạm xác thực kép khi kích hoạt Restore!"
         )
-        raise PermissionError("RBAC Denied: Phục hồi yêu cầu xác thực kép (Backup_Operator + Security_Admin)[cite: 2].")
+        raise PermissionError("RBAC Denied: Phục hồi yêu cầu xác thực kép (Backup_Operator + Security_Admin).")
 
     os.makedirs(RESTORE_STAGE_DIR, exist_ok=True)
     os.makedirs(RESTORED_OUTPUT_DIR, exist_ok=True)
 
     # -------------------------------------------------------------------------
-    # BƯỚC 1: Thu thập bộ 3 tệp (.tar.gz.enc, .key.enc, .sha256) về Staging[cite: 2]
+    # BƯỚC 1: Thu thập bộ 3 tệp (.tar.gz.enc, .key.enc, .sha256) về Staging
     # -------------------------------------------------------------------------
     enc_name = f"{backup_base_name}.tar.gz.enc"
     key_name = f"{backup_base_name}.key.enc"
@@ -55,7 +55,7 @@ def run_restore_workflow(
         shutil.copy2(os.path.join(source_dir, fname), dst)
 
     # -------------------------------------------------------------------------
-    # BƯỚC 2: Kiểm tra tính toàn vẹn SHA-256 (Integrity Check)[cite: 2]
+    # BƯỚC 2: Kiểm tra tính toàn vẹn SHA-256 (Integrity Check)
     # -------------------------------------------------------------------------
     with open(stage_sha, "r", encoding="utf-8") as f:
         expected_hash = f.read().strip().split()[0]
@@ -68,10 +68,10 @@ def run_restore_workflow(
             f"(Expected={expected_hash[:12]}..., Actual={actual_hash[:12]}...). Dừng khôi phục!"
         )
         shutil.rmtree(RESTORE_STAGE_DIR, ignore_errors=True)
-        raise ValueError("Integrity Check Failed: Tệp sao lưu đã bị can thiệp trái phép hoặc hỏng[cite: 2]!")
+        raise ValueError("Integrity Check Failed: Tệp sao lưu đã bị can thiệp trái phép hoặc hỏng!")
 
     # -------------------------------------------------------------------------
-    # BƯỚC 3: Giải mã khóa DEK bằng Master Key (KEK) trên RAM[cite: 2]
+    # BƯỚC 3: Giải mã khóa DEK bằng Master Key (KEK) trên RAM
     # -------------------------------------------------------------------------
     with open(stage_key, "rb") as f:
         encrypted_dek_blob = f.read()
@@ -84,10 +84,10 @@ def run_restore_workflow(
             f"Giải mã khóa DEK thất bại cho gói {backup_base_name} (Khóa KEK không hợp lệ)!"
         )
         shutil.rmtree(RESTORE_STAGE_DIR, ignore_errors=True)
-        raise ValueError("Key Decryption Failed: Khóa KEK không khớp hoặc bị giả mạo[cite: 2]!") from e
+        raise ValueError("Key Decryption Failed: Khóa KEK không khớp hoặc bị giả mạo!") from e
 
     # -------------------------------------------------------------------------
-    # BƯỚC 4: Giải mã dữ liệu AES-256-GCM & Bung nén vào hệ thống[cite: 2]
+    # BƯỚC 4: Giải mã dữ liệu AES-256-GCM & Bung nén vào hệ thống
     # -------------------------------------------------------------------------
     with open(stage_enc, "rb") as f:
         enc_blob = f.read()
@@ -105,7 +105,7 @@ def run_restore_workflow(
         tar.extractall(path=RESTORED_OUTPUT_DIR)
 
     # -------------------------------------------------------------------------
-    # BƯỚC 5: Kiểm tra chữ ký HMAC sổ cái, dọn sạch file tạm & Gửi Syslog[cite: 2]
+    # BƯỚC 5: Kiểm tra chữ ký HMAC sổ cái, dọn sạch file tạm & Gửi Syslog
     # -------------------------------------------------------------------------
     restored_json = os.path.join(
         RESTORED_OUTPUT_DIR, "prod_db_192_168_20_10", "core_banking_dump.json"
@@ -118,11 +118,11 @@ def run_restore_workflow(
         if calc_hmac != rec["hmac_sha256"]:
             raise ValueError(f"Phát hiện sai lệch chữ ký HMAC tại tài khoản {rec['account_id']}!")
 
-    # Xóa sạch thư mục tạm chứa file giải nén trung gian[cite: 2]
+    # Xóa sạch thư mục tạm chứa file giải nén trung gian
     shutil.rmtree(RESTORE_STAGE_DIR, ignore_errors=True)
 
     elapsed_sec = time.perf_counter() - start_time
-    rto_limit_sec = 3600.0  # RTO mục tiêu <= 60 phút (3600 giây)[cite: 2]
+    rto_limit_sec = 3600.0  # RTO mục tiêu <= 60 phút (3600 giây)
 
     send_syslog(
         "[RESTORE_SUCCESS]", 6, f"{operator_role}+{approver_role}",

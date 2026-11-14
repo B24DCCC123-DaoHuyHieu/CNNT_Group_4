@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 Script 1: Khởi tạo dữ liệu giả định Ngân hàng số (Mock Core Banking Data)
-Phụ trách: Thành viên C (Đào Huy Hiệu)
+
 """
 
 import os

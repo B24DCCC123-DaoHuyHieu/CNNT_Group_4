@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 Script 3: Thực thi Sao lưu tự động (Full / Incremental), Mã hóa AES-256-GCM
-và phân phối theo nguyên tắc 3-2-1[cite: 2]
+và phân phối theo nguyên tắc 3-2-1
 """
 
 import os
@@ -16,10 +16,10 @@ from kms_manager import wrap_dek_with_kek, send_syslog, BASE_DIR
 
 PROD_DB_DIR = os.path.join(BASE_DIR, "prod_db_192_168_20_10")
 LOCAL_STAGING_DIR = os.path.join(BASE_DIR, "local_staging_disk")
-REMOTE_BACKUP_SRV = os.path.join(BASE_DIR, "backup_srv_192_168_20_50_vlan30")
+REMOTE_BACKUP_SRV = os.path.join(BASE_DIR, "backup_srv_192_168_20_50_vlan20")
 
 def compute_sha256(filepath: str) -> str:
-    """Tính giá trị băm SHA-256 của tệp .tar.gz.enc[cite: 2]"""
+    """Tính giá trị băm SHA-256 của tệp .tar.gz.enc"""
     sha256 = hashlib.sha256()
     with open(filepath, "rb") as f:
         for chunk in iter(lambda: f.read(65536), b""):
@@ -28,11 +28,11 @@ def compute_sha256(filepath: str) -> str:
 
 def run_backup(backup_type: str = "FULL", operator_role: str = "Backup_Operator") -> str:
     """
-    Thực hiện quy trình đóng gói, mã hóa phong bì và tạo bộ 3 tệp chuẩn Mục 3.4A[cite: 2]
+    Thực hiện quy trình đóng gói, mã hóa phong bì và tạo bộ 3 tệp chuẩn Mục 3.4A
     """
     if operator_role != "Backup_Operator":
         send_syslog("[BACKUP_FAIL]", 3, operator_role, "Sai vai trò RBAC khi gọi script sao lưu!")
-        raise PermissionError("RBAC Denied: Chỉ Backup_Operator được phép chạy script Backup[cite: 2].")
+        raise PermissionError("RBAC Denied: Chỉ Backup_Operator được phép chạy script Backup.")
 
     os.makedirs(LOCAL_STAGING_DIR, exist_ok=True)
     os.makedirs(REMOTE_BACKUP_SRV, exist_ok=True)
@@ -46,7 +46,7 @@ def run_backup(backup_type: str = "FULL", operator_role: str = "Backup_Operator"
     sha_file = os.path.join(LOCAL_STAGING_DIR, f"{base_name}.sha256")
 
     try:
-        # Bước 1: Nén toàn bộ thư mục dữ liệu DB thành .tar.gz[cite: 2]
+        # Bước 1: Nén toàn bộ thư mục dữ liệu DB thành .tar.gz
         with tarfile.open(temp_tar, "w:gz") as tar:
             tar.add(PROD_DB_DIR, arcname=os.path.basename(PROD_DB_DIR))
 
@@ -54,7 +54,7 @@ def run_backup(backup_type: str = "FULL", operator_role: str = "Backup_Operator"
             plaintext_data = f.read()
         os.remove(temp_tar)  # Xóa ngay file nén bản rõ
 
-        # Bước 2: Sinh khóa phiên DEK (256-bit) ngẫu nhiên trên RAM & mã hóa AES-256-GCM[cite: 2]
+        # Bước 2: Sinh khóa phiên DEK (256-bit) ngẫu nhiên trên RAM & mã hóa AES-256-GCM
         dek = secrets.token_bytes(32)
         aesgcm = AESGCM(dek)
         nonce = secrets.token_bytes(12)
@@ -63,20 +63,20 @@ def run_backup(backup_type: str = "FULL", operator_role: str = "Backup_Operator"
         with open(enc_file, "wb") as f:
             f.write(nonce + ciphertext)
 
-        # Bước 3: Mã hóa khóa DEK bằng Master Key KEK (Envelope Encryption) và xóa DEK trên RAM[cite: 2]
+        # Bước 3: Mã hóa khóa DEK bằng Master Key KEK (Envelope Encryption) và xóa DEK trên RAM
         encrypted_dek = wrap_dek_with_kek(dek)
-        del dek  # Xóa biến DEK bản rõ ngay sau khi sử dụng[cite: 2]
+        del dek  # Xóa biến DEK bản rõ ngay sau khi sử dụng
 
         with open(key_file, "wb") as f:
             f.write(encrypted_dek)
 
-        # Bước 4: Băm SHA-256 tệp .tar.gz.enc để kiểm tra tính toàn vẹn[cite: 2]
+        # Bước 4: Băm SHA-256 tệp .tar.gz.enc để kiểm tra tính toàn vẹn
         file_hash = compute_sha256(enc_file)
         with open(sha_file, "w", encoding="utf-8") as f:
             f.write(f"{file_hash}  {os.path.basename(enc_file)}\n")
 
         # Bước 5: Thực thi nguyên tắc 3-2-1 -> Đồng bộ qua cổng TCP/22 (SFTP/SCP mô phỏng)
-        # sang Backup_Server cách ly (192.168.20.50)[cite: 2]
+        # sang Backup_Server cách ly (192.168.20.50)
         for fpath in (enc_file, key_file, sha_file):
             shutil.copy2(fpath, os.path.join(REMOTE_BACKUP_SRV, os.path.basename(fpath)))
 

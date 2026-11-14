@@ -1,7 +1,7 @@
 {
     "db_host": "192.168.20.10",
     "vlan": "VLAN 20 (Internal)",
-    "generated_at": "2026-11-09 10:24:42",
+    "generated_at": "2026-11-14 13:37:16",
     "customers_pii_credentials": [
         {
             "customer_id": "CUST_001",
@@ -10,8 +10,8 @@
             "pan_masked": "970422******7890",
             "credentials": {
                 "algorithm": "Argon2id/PBKDF2-SHA256",
-                "salt_hex": "e8d48f1c8baecaad5d13f3fee913526d",
-                "hash_hex": "f7699d00da017f4eaf46ba21be819b401921a6b66db673c09ae143f4f7dd5dbd"
+                "salt_hex": "83091ee2fddf5241f9d614879eb21b6b",
+                "hash_hex": "ad9f0b9d4a1e8e9802fb7ac962d746b5324576278732b9638cd66db236135a58"
             }
         },
         {
@@ -21,8 +21,8 @@
             "pan_masked": "970422******3210",
             "credentials": {
                 "algorithm": "Argon2id/PBKDF2-SHA256",
-                "salt_hex": "e87c085911856913d754ba250cddc985",
-                "hash_hex": "d9ec6365fe8084ed23d98c05dff90880e8972aeabf998ac540fe674d1a76542a"
+                "salt_hex": "7b21c6b1bf210ca1b414d67b9b69852e",
+                "hash_hex": "4e0d70775fdd9539d7c5967c06af7dcc2e31e4533641e01f66e2283c3ee275c9"
             }
         }
     ],
@@ -30,14 +30,14 @@
         {
             "account_id": "ACC_1001",
             "balance_vnd": 150000000.0,
-            "updated_at": "2026-11-09 10:24:42",
-            "hmac_sha256": "21aa7624a3381caf0370e0a0209875094aff4e5e8e7c3de3ca1dbd52e73c221a"
+            "updated_at": "2026-11-14 13:37:16",
+            "hmac_sha256": "dbc4f55600e7e49660afe6c187cedf27759516a7272863bf5aaff445622108e1"
         },
         {
             "account_id": "ACC_1002",
             "balance_vnd": 85500000.0,
-            "updated_at": "2026-11-09 10:24:42",
-            "hmac_sha256": "7290846779d03537dc2e27b1c0dd97c46224b1719226742f82455be819e115b0"
+            "updated_at": "2026-11-14 13:37:16",
+            "hmac_sha256": "bc6efeb4f297a2e9afbd50e54f3cf3710ce792be335009c72be87fe97fe54fb4"
         }
     ]
 }

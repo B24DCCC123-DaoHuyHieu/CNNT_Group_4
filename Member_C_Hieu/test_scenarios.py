@@ -25,7 +25,7 @@ def run_all_tests():
     pkg_name = run_backup("FULL", "Backup_Operator")
 
     # -------------------------------------------------------------------------
-    # TEST CASE 01: Sửa 1 byte trong file .tar.gz.enc -> Kiểm tra SHA-256 Alert[cite: 2]
+    # TEST CASE 01: Sửa 1 byte trong file .tar.gz.enc -> Kiểm tra SHA-256 Alert
     # -------------------------------------------------------------------------
     print("\n--- [TEST CASE 01]: Sửa 1 byte trong file .enc (Kiểm tra toàn vẹn SHA-256) ---")
     enc_path = os.path.join(REMOTE_BACKUP_SRV, f"{pkg_name}.tar.gz.enc")
@@ -45,11 +45,11 @@ def run_all_tests():
     except ValueError as e:
         print(f"✅ KẾT QUẢ TC01: ĐẠT - Đã chặn đứng và báo lỗi: {e}")
     finally:
-        # Phục hồi lại file chuẩn từ bản dự phòng thứ 2 (Local Staging Disk)[cite: 2]
+        # Phục hồi lại file chuẩn từ bản dự phòng thứ 2 (Local Staging Disk)
         shutil.move(backup_copy, enc_path)
 
     # -------------------------------------------------------------------------
-    # TEST CASE 02: Giải mã bằng khóa KEK sai (Fake Key Attack)[cite: 2]
+    # TEST CASE 02: Giải mã bằng khóa KEK sai (Fake Key Attack)
     # -------------------------------------------------------------------------
     print("\n--- [TEST CASE 02]: Giải mã gói sao lưu bằng khóa KEK giả mạo ---")
     fake_kek = secrets.token_bytes(32)
@@ -62,7 +62,7 @@ def run_all_tests():
         print(f"✅ KẾT QUẢ TC02: ĐẠT - Hệ thống từ chối khóa sai: {e}")
 
     # -------------------------------------------------------------------------
-    # TEST CASE 03: Khôi phục chuẩn & Đo thời gian thực tế so với RTO (<= 60 phút)[cite: 2]
+    # TEST CASE 03: Khôi phục chuẩn & Đo thời gian thực tế so với RTO (<= 60 phút)
     # -------------------------------------------------------------------------
     print("\n--- [TEST CASE 03]: Phục hồi dữ liệu chuẩn & Đo chỉ số RTO ---")
     metrics = run_restore_workflow(pkg_name, "Backup_Operator", "Security_Admin")
