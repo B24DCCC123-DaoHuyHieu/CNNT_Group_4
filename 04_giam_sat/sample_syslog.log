@@ -1,0 +1,31 @@
+2026-11-16 17:30:00 Router_Core %SYS-6-LOGGINGHOST_STARTSTOP: Logging to host 192.168.20.40 port 514 started
+2026-11-16 17:30:05 Switch %SYS-6-LOGGINGHOST_STARTSTOP: Logging to host 192.168.20.40 port 514 started
+2026-11-16 17:31:00 Router_Core %SEC_LOGIN-5-LOGIN_SUCCESS: Login Success [user: admin] [Source: 192.168.20.20] [localport: 23] at 17:31:00 UTC Mon Nov 16 2026
+2026-11-16 17:32:00 Router_Core %SYS-5-CONFIG_I: Configured from console by admin
+2026-11-16 17:35:02 Router_Core %SEC_LOGIN-4-LOGIN_FAILED: Login failed [user: admin] [Source: 192.168.20.20] [localport: 23] [Reason: Login Authentication Failed]
+2026-11-16 17:35:09 Router_Core %SEC_LOGIN-4-LOGIN_FAILED: Login failed [user: admin] [Source: 192.168.20.20] [localport: 23] [Reason: Login Authentication Failed]
+2026-11-16 17:35:15 Router_Core %SEC_LOGIN-4-LOGIN_FAILED: Login failed [user: admin] [Source: 192.168.20.20] [localport: 23] [Reason: Login Authentication Failed]
+2026-11-16 17:40:00 Router_Core %SEC_LOGIN-4-LOGIN_FAILED: Login failed [user: operator] [Source: 100.100.100.2] [localport: 23] [Reason: Login Authentication Failed]
+2026-11-16 17:42:00 Switch %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/3, changed state to up
+2026-11-16 17:45:00 Router_Core %SEC_LOGIN-4-LOGIN_FAILED: Login failed [user: operator] [Source: 100.100.100.2] [localport: 23] [Reason: Login Authentication Failed]
+2026-11-16 17:46:00 Router_Core %SEC_LOGIN-5-LOGIN_SUCCESS: Login Success [user: admin] [Source: 100.100.100.2] [localport: 23] at 17:46:00 UTC Mon Nov 16 2026
+2026-11-16 17:50:11 Router_Core %SEC-6-IPACCESSLOGP: list 110 denied icmp 100.100.100.2 -> 192.168.20.10 (8/0), 1 packet
+2026-11-16 17:50:12 Router_Core %SEC-6-IPACCESSLOGP: list 110 denied icmp 100.100.100.2 -> 192.168.20.10 (8/0), 1 packet
+2026-11-16 17:50:13 Router_Core %SEC-6-IPACCESSLOGP: list 110 denied icmp 100.100.100.2 -> 192.168.20.10 (8/0), 1 packet
+2026-11-16 17:50:14 Router_Core %SEC-6-IPACCESSLOGP: list 110 denied icmp 100.100.100.2 -> 192.168.20.10 (8/0), 1 packet
+2026-11-16 17:50:15 Router_Core %SEC-6-IPACCESSLOGP: list 110 denied icmp 100.100.100.2 -> 192.168.20.10 (8/0), 1 packet
+2026-11-16 17:51:00 Router_Core %SEC-6-IPACCESSLOGP: list 110 denied icmp 192.168.10.10 -> 192.168.20.20 (8/0), 1 packet
+2026-11-16 17:52:00 Router_Core %SEC-6-IPACCESSLOGP: list 110 denied tcp 192.168.20.55(3333) -> 192.168.20.10(3306), 1 packet
+2026-11-16 17:52:30 Switch %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/3, changed state to up
+2026-11-16 17:53:00 Router_Core %SEC-6-IPACCESSLOGP: list 110 permitted tcp 192.168.20.77(4444) -> 192.168.20.10(3306), 1 packet
+2026-11-16 17:54:00 Router_Core %SEC-6-IPACCESSLOGP: list 110 permitted tcp 192.168.10.10(5555) -> 192.168.20.10(3306), 1 packet
+2026-11-16 17:55:00 Switch %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/1, changed state to down
+2026-11-16 17:56:00 Switch %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/1, changed state to up
+2026-11-16 17:57:00 Switch %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/3, changed state to down
+2026-11-16 17:58:00 Switch %NTP-4-UNSYNC: NTP sync is lost
+2026-11-16 18:06:00 Router_Core %SEC_LOGIN-5-LOGIN_SUCCESS: Login Success [user: admin] [Source: 192.168.20.20] [localport: 23] at 18:06:00 UTC Mon Nov 16 2026
+2026-11-16 18:10:00 Switch %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/3, changed state to up
+2026-11-16 18:20:00 Router_Core %SYS-5-CONFIG_I: Configured from console by admin
+2026-11-16 18:24:00 Switch %SYS-5-CONFIG_I: Configured from console by console
+2026-11-16 18:30:00 Switch %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/3, changed state to up
+2026-11-16 18:40:00 Switch %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/3, changed state to up

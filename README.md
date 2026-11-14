@@ -14,10 +14,10 @@ Các chỗ ghi `[điền ...]` là thông tin README này chưa biết; thành v
 
 | Thành viên | Họ tên | Mảng | Sản phẩm kỹ thuật riêng |
 | --- | --- | --- | --- |
-| A | [điền] | Kiến trúc và mạng | `BTL_V1.pkt`: VLAN, trunk, router-on-a-stick, ACL, bảng IP, sơ đồ hệ thống |
+| A | [điền] | Kiến trúc và mạng | `BTL_V4.pkt`: VLAN, trunk, router-on-a-stick, ACL, bảng IP, sơ đồ hệ thống |
 | B | [điền] | Xác thực và phân quyền (IAM, RBAC, phiên) | Thiết kế IAM, ma trận RBAC, chính sách xác thực và quản lý phiên; [điền file/script mô phỏng MFA nếu có] |
 | C | Đào Huy Hiếu | Mã hóa, quản lý khóa, sao lưu, phục hồi | `backup_engine.py`, `restore_engine.py`, `kms_manager.py`, `mock_data_gen.py`, `test_scenarios.py` (nhánh `Dao_Huy_Hieu/Member_C_Hieu` trên GitHub) |
-| D | [điền] | Giám sát, cảnh báo, kiểm thử | Cấu hình Syslog/NTP, bảng quy tắc cảnh báo A01–A13, `giam_sat_canh_bao.py`, `sample_syslog.log`, `ke_hoach_kiem_thu.xlsx` |
+| D | Nguyễn Viết Vinh - B24DCCC290 | Giám sát, cảnh báo, kiểm thử | Cấu hình Syslog/NTP, bảng quy tắc cảnh báo A01–A13, `giam_sat_canh_bao.py`, `sample_syslog.log`, `ke_hoach_kiem_thu.xlsx` |
 
 ---
 
@@ -50,7 +50,7 @@ BTL_CNNT_Group_4/
 | Hệ điều hành đã dùng | Windows (theo ảnh chụp màn hình) |
 | Python cho script của C | [C điền phiên bản Python đã dùng]; thư viện cần cài: [C điền, xem repo] |
 | Python cho script của D | Python 3.8 trở lên; chỉ dùng thư viện chuẩn, không cần cài thêm |
-| Mô hình | `BTL_V1.pkt` |
+| Mô hình | `BTL_V4.pkt` |
 
 ---
 
@@ -333,7 +333,7 @@ Mỗi thành viên phải giải thích được và chạy lại được phầ
 
 - [ ] Báo cáo 12–18 trang nội dung chính (phụ lục cấu hình không tính)
 - [ ] Sơ đồ hệ thống, bảng tài nguyên, IP, quyền
-- [ ] `BTL_V1.pkt` và file cấu hình
+- [ ] `BTL_V4.pkt` và file cấu hình
 - [ ] Script, mã nguồn của từng thành viên
 - [ ] README này (đã điền các chỗ `[điền ...]`)
 - [ ] Bảng kiểm thử có bằng chứng và dấu thời gian
