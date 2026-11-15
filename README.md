@@ -290,7 +290,7 @@ Trên một máy khác và thư mục sạch: mở `BTL_V4.pkt`, làm theo READM
 1. **Địa chỉ Syslog/NTP:** bản thử nghiệm đầu dùng 10.10.99.10 và 10.10.99.20 (VLAN 99), mô hình cuối dùng 192.168.20.40 và 192.168.20.30 (VLAN 20). Kiểm tra `show running-config` của Router_Core và Switch_Central xem còn cấu hình cũ không.
 2. **ACL 100 chưa có `log`:** nếu không thêm `log` ở dòng deny (mục 5), Router không sinh log ACL và các ca D04, A03 không có dữ liệu.
 3. **DMZ sang VLAN 20 chưa bị lọc:** ACL chỉ đặt ở G0/1 chiều vào, nên Web_Server vẫn ping được cả Database_Server lẫn PC_Admin. A cần quyết định: thêm ACL ở `g0/0.10` (chỉ cho Web_Server tới Database_Server theo cổng cần thiết) hoặc ghi rõ đây là phạm vi chưa làm. Quyết định này ảnh hưởng ca N08, D07 và quy tắc A04.
-4. **Backup_Server 192.168.20.50:** báo cáo của C ghi VLAN 20 ở chỗ này và VLAN 30 ở chỗ khác, và thiết bị này **không có** trong `BTL_V4.pkt` (chỉ là thư mục mô phỏng trong script). Cần thống nhất và ghi vào phần giả định.
+4. **Backup_Server 192.168.20.50:** hiện đã được bổ sung vào VLAN 20 và kết nối qua Switch_Central Fa0/7.
 5. **Bảng IP và cổng:** bảng của A ghi Switch_Central cắm F0/1 và PC_KhachHang vào G0/0; sơ đồ và cấu hình thực tế là Switch Gig0/1 ↔ Router G0/0 (trunk), PC_KhachHang ↔ Router G0/1. README này dùng theo cấu hình thực tế.
 6. **Bằng chứng của C không khớp nhau:** Hình 1 ghi thời điểm 19:49:10 và văn bản ghi RTO 1,5328 giây, nhưng ảnh console trong hình hiển thị 2026-11-12 20:28:48 và RTO 0,0141 giây. Cần chạy lại một lần, rồi dùng cùng một lần chạy cho ảnh, log và bảng kết quả, và nộp kèm dữ liệu đo gốc.
 7. **Tên thiết bị chưa thống nhất:** Switch1 và Switch_Central, Web_Server và Web_App_Server, PC_Admin và PC_IT_Admin. Chọn một bộ tên theo `.pkt` và dùng thống nhất ở báo cáo, bảng IP, script.
@@ -323,7 +323,7 @@ Trên một máy khác và thư mục sạch: mở `BTL_V4.pkt`, làm theo READM
 
 | Thành viên | Công cụ AI | Phần được hỗ trợ | Cách bạn đã kiểm tra và chỉnh |
 | --- | --- | --- | --- |
-| A | [Copilot (Microsoft)] | [điền] | [điền] |
+| A | [Microsoft Copilot] | [Hỗ trợ giải thích kiến trúc mạng, VLAN, Trunk, Router-on-a-Stick, ACL; hỗ trợ rà soát bảng IP, README và đề xuất cấu hình Cisco Packet Tracer.] | [Đã trực tiếp cấu hình trên Packet Tracer, kiểm tra bằng các lệnh show vlan brief, show interfaces trunk, show ip interface brief, show access-lists và các bài kiểm thử ping giữa các thiết bị; chỉnh sửa lại địa chỉ IP, cổng kết nối và tên thiết bị để khớp với mô hình thực tế.] |
 | B | [điền] | [điền] | [điền] |
 | C | Gemini (Google)| [Hỗ trợ chuẩn hóa bảng báo cáo và gợi ý khung script mô phỏng mã hóa/sao lưu] | [Đã trực tiếp chỉnh sửa IP/VLAN 20 theo `BTL_V4.pkt`, tự chạy kiểm thử 4 kịch bản (`TC-C00` -> `TC-C03`) và kiểm tra dữ liệu đo RTO thực tế] |
 | D | Claude (Anthropic) | Bản đầu của `giam_sat_canh_bao.py`, bảng quy tắc cảnh báo, kế hoạch kiểm thử, README | [D điền: đã đọc, chỉnh, chạy lại như thế nào] |
