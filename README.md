@@ -16,7 +16,7 @@ Các chỗ ghi `[điền ...]` là thông tin README này chưa biết; thành v
 | --- | --- | --- | --- |
 | A | [điền] | Kiến trúc và mạng | `BTL_V4.pkt`: VLAN, trunk, router-on-a-stick, ACL, bảng IP, sơ đồ hệ thống |
 | B | [điền] | Xác thực và phân quyền (IAM, RBAC, phiên) | Thiết kế IAM, ma trận RBAC, chính sách xác thực và quản lý phiên; [điền file/script mô phỏng MFA nếu có] |
-| C | Đào Huy Hiệu | Mã hóa, quản lý khóa, sao lưu, phục hồi | `backup_engine.py`, `restore_engine.py`, `kms_manager.py`, `mock_data_gen.py`, `test_scenarios.py` (nhánh `Dao_Huy_Hieu/Member_C_Hieu` trên GitHub) |
+| C | Đào Huy Hiệu | Mã hóa, quản lý khóa, sao lưu, phục hồi | `backup_engine.py`, `restore_engine.py`, `kms_manager.py`, `mock_data_gen.py`, `test_scenarios.py` (nhánh `Dao_Huy_Hieu/03_ma_hoa_sao_luu` trên GitHub) |
 | D | Nguyễn Viết Vinh - B24DCCC290 | Giám sát, cảnh báo, kiểm thử | Cấu hình Syslog/NTP, bảng quy tắc cảnh báo A01–A13, `giam_sat_canh_bao.py`, `sample_syslog.log`, `ke_hoach_kiem_thu.xlsx` |
 
 ---
