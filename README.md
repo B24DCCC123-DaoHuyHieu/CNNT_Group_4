@@ -31,7 +31,7 @@ BTL_CNNT_Group_4/
 │   ├── so_do_he_thong.png
 │   └── cau_hinh/              switch.txt, router.txt, acl.txt, syslog_ntp.txt
 ├── 02_iam_rbac/               (B) tài liệu và file mô phỏng
-├── Member_C_Hieu/         (C) backup_engine.py, restore_engine.py, kms_manager.py,
+├── 03_ma_hoa_sao_luu/         (C) backup_engine.py, restore_engine.py,
 kms_manager.py, 
 |                               mock_data_gen.py, test_scenarios.py, du_lieu_do_goc/
 bank_env/                             
@@ -256,11 +256,11 @@ Với `sample_syslog.log` kết quả đúng là **14 cảnh báo** (10 mức Ca
 ### Nhóm C, mã hóa, sao lưu, phục hồi
 
 ```text
-cd Member_C_Hieu
+cd 03_ma_hoa_sao_luu
 python test_scenarios.py
 ```
 
-Script chạy 4 kịch bản (TC-C00 sao lưu 3-2-1 có mã hóa phong bì; TC-C01 phát hiện sửa 1 byte trong file `.enc`; TC-C02 giải mã bằng khóa KEK sai; TC-C03 phục hồi 5 bước và đo RTO) và ghi log gửi sang `syslog_mirror_192_168_20_40.log`. [C điền: cách cài thư viện và kết quả mong đợi chi tiết.]
+Script chạy 4 kịch bản (TC-C00 sao lưu 3-2-1 có mã hóa phong bì; TC-C01 phát hiện sửa 1 byte trong file `.enc`; TC-C02 giải mã bằng khóa KEK sai; TC-C03 phục hồi 5 bước và đo RTO) và ghi log gửi sang `syslog_mirror_192_168_20_40.log`. [Chạy trực tiếp bằng thư viện chuẩn Python (tùy chọn `pip install cryptography`). Kết quả mong đợi: Tất cả 4 kịch bản `TC-C00` -> `TC-C03` đều báo `ĐẠT` và thời gian khôi phục `RTO < 2 giây`.]
 
 ### Nhóm X, xác thực và phân quyền
 
@@ -324,7 +324,7 @@ Trên một máy khác và thư mục sạch: mở `BTL_V1.pkt`, làm theo READM
 | --- | --- | --- | --- |
 | A | [điền] | [điền] | [điền] |
 | B | [điền] | [điền] | [điền] |
-| C | [Gemini (Google)] | [Hỗ trợ chuẩn hóa bảng báo cáo và gợi ý khung script mô phỏng mã hóa/sao lưu] | [Đã trực tiếp chỉnh sửa IP/VLAN 20 theo `BTL_V4.pkt`, tự chạy kiểm thử 4 kịch bản (`TC-C00` -> `TC-C03`) và kiểm tra dữ liệu đo RTO thực tế] |
+| C | Gemini (Google)| [Hỗ trợ chuẩn hóa bảng báo cáo và gợi ý khung script mô phỏng mã hóa/sao lưu] | [Đã trực tiếp chỉnh sửa IP/VLAN 20 theo `BTL_V4.pkt`, tự chạy kiểm thử 4 kịch bản (`TC-C00` -> `TC-C03`) và kiểm tra dữ liệu đo RTO thực tế] |
 | D | Claude (Anthropic) | Bản đầu của `giam_sat_canh_bao.py`, bảng quy tắc cảnh báo, kế hoạch kiểm thử, README | [D điền: đã đọc, chỉnh, chạy lại như thế nào] |
 
 Mỗi thành viên phải giải thích được và chạy lại được phần mình nộp.
