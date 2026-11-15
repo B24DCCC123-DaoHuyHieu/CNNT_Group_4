@@ -31,8 +31,10 @@ BTL_CNNT_Group_4/
 │   ├── so_do_he_thong.png
 │   └── cau_hinh/              switch.txt, router.txt, acl.txt, syslog_ntp.txt
 ├── 02_iam_rbac/               (B) tài liệu và file mô phỏng
-├── 03_ma_hoa_sao_luu/         (C) backup_engine.py, restore_engine.py, kms_manager.py,
-│                              mock_data_gen.py, test_scenarios.py, du_lieu_do_goc/
+├── Member_C_Hieu/         (C) backup_engine.py, restore_engine.py, kms_manager.py,
+kms_manager.py, 
+|                               mock_data_gen.py, test_scenarios.py, du_lieu_do_goc/
+bank_env/                             
 ├── 04_giam_sat/               (D) giam_sat_canh_bao.py, sample_syslog.log
 ├── 05_kiem_thu/               ke_hoach_kiem_thu.xlsx, bang_chung/
 ├── 06_bao_cao/                bao_cao.pdf, phu_luc_cau_hinh/
@@ -48,7 +50,7 @@ BTL_CNNT_Group_4/
 | --- | --- |
 | Cisco Packet Tracer | [điền, xem Help > About Packet Tracer] |
 | Hệ điều hành đã dùng | Windows (theo ảnh chụp màn hình) |
-| Python cho script của C | [C điền phiên bản Python đã dùng]; thư viện cần cài: [C điền, xem repo] |
+| Python cho script của C | [Python 3.13 (chạy trực tiếp bằng thư viện chuẩn Python, tùy chọn `pip install cryptography`)] |
 | Python cho script của D | Python 3.8 trở lên; chỉ dùng thư viện chuẩn, không cần cài thêm |
 | Mô hình | `BTL_V4.pkt` |
 
@@ -254,7 +256,7 @@ Với `sample_syslog.log` kết quả đúng là **14 cảnh báo** (10 mức Ca
 ### Nhóm C, mã hóa, sao lưu, phục hồi
 
 ```text
-cd 03_ma_hoa_sao_luu
+cd Member_C_Hieu
 python test_scenarios.py
 ```
 
@@ -322,7 +324,7 @@ Trên một máy khác và thư mục sạch: mở `BTL_V1.pkt`, làm theo READM
 | --- | --- | --- | --- |
 | A | [điền] | [điền] | [điền] |
 | B | [điền] | [điền] | [điền] |
-| C | [điền] | [điền] | [điền] |
+| C | [Gemini (Google)] | [Hỗ trợ chuẩn hóa bảng báo cáo và gợi ý khung script mô phỏng mã hóa/sao lưu] | [Đã trực tiếp chỉnh sửa IP/VLAN 20 theo `BTL_V4.pkt`, tự chạy kiểm thử 4 kịch bản (`TC-C00` -> `TC-C03`) và kiểm tra dữ liệu đo RTO thực tế] |
 | D | Claude (Anthropic) | Bản đầu của `giam_sat_canh_bao.py`, bảng quy tắc cảnh báo, kế hoạch kiểm thử, README | [D điền: đã đọc, chỉnh, chạy lại như thế nào] |
 
 Mỗi thành viên phải giải thích được và chạy lại được phần mình nộp.
