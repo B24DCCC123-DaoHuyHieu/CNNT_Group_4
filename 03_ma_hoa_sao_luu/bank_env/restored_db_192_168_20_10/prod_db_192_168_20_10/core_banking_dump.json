@@ -1,0 +1,43 @@
+{
+    "db_host": "192.168.20.10",
+    "vlan": "VLAN 20 (Internal)",
+    "generated_at": "2026-11-15 13:22:32",
+    "customers_pii_credentials": [
+        {
+            "customer_id": "CUST_001",
+            "full_name": "Nguyen Van A",
+            "cccd_encrypted_col": "ENC_AES256GCM_038206001234",
+            "pan_masked": "970422******7890",
+            "credentials": {
+                "algorithm": "Argon2id/PBKDF2-SHA256",
+                "salt_hex": "4e4cb4b192cddf6b2e8f621f011b2e26",
+                "hash_hex": "6f8e914248dd244a48bdc3975ac065007bff21b11852ba29dfe3b63c10565292"
+            }
+        },
+        {
+            "customer_id": "CUST_002",
+            "full_name": "Tran Thi B",
+            "cccd_encrypted_col": "ENC_AES256GCM_001199005678",
+            "pan_masked": "970422******3210",
+            "credentials": {
+                "algorithm": "Argon2id/PBKDF2-SHA256",
+                "salt_hex": "f43ed2c4e379ae021d708495a2bcb0b4",
+                "hash_hex": "b4f57e7ac325022e944367afba6b9a32b77171a840d3470c993a90ee8b381b14"
+            }
+        }
+    ],
+    "core_banking_ledger": [
+        {
+            "account_id": "ACC_1001",
+            "balance_vnd": 150000000.0,
+            "updated_at": "2026-11-15 13:22:32",
+            "hmac_sha256": "8f5445372661c28d483261893764229aa4280d81ef56fd35721cb5735c0267a3"
+        },
+        {
+            "account_id": "ACC_1002",
+            "balance_vnd": 85500000.0,
+            "updated_at": "2026-11-15 13:22:32",
+            "hmac_sha256": "957b5499180377c9e780d1b249ac5f2e1a6efc048c415e40f46003e38e7523c3"
+        }
+    ]
+}
