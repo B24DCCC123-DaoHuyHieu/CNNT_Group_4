@@ -1,6 +1,6 @@
 # BTL CNNT – Nhóm 4 – Đề tài 16: Thiết kế hạ tầng CNTT an toàn cho ngân hàng số
 
-Phiên bản README: 0.1 (bản chính, 14/11/2026). File mô hình: `BTL_V4.pkt`.
+Phiên bản README: 0.1 (bản chính, 14/11/2026). File mô hình: `BTL_V5.pkt`.
 
 Dự án mô phỏng hạ tầng của một ngân hàng số giả định bằng Cisco Packet Tracer, kết hợp các script Python chạy trên **dữ liệu giả** cho phần mã hóa, sao lưu và giám sát. Mọi địa chỉ IP, tài khoản, số thẻ, khóa trong dự án đều là dữ liệu giả phục vụ bài tập.
 
@@ -14,7 +14,7 @@ Các chỗ ghi `[điền ...]` là thông tin README này chưa biết; thành v
 
 | Thành viên | Họ tên | Mảng | Sản phẩm kỹ thuật riêng |
 | --- | --- | --- | --- |
-| A | [Lữ Trọng Đại] | Kiến trúc và mạng | `BTL_V4.pkt`: VLAN, trunk, router-on-a-stick, ACL, bảng IP, sơ đồ hệ thống |
+| A | Lữ Trọng Đại - B24DCCC045 | Kiến trúc và mạng | `BTL_V5.pkt`: VLAN, trunk, router-on-a-stick, ACL, bảng IP, sơ đồ hệ thống |
 | B | [điền] | Xác thực và phân quyền (IAM, RBAC, phiên) | Thiết kế IAM, ma trận RBAC, chính sách xác thực và quản lý phiên; [điền file/script mô phỏng MFA nếu có] |
 | C | Đào Huy Hiệu | Mã hóa, quản lý khóa, sao lưu, phục hồi | `backup_engine.py`, `restore_engine.py`, `kms_manager.py`, `mock_data_gen.py`, `test_scenarios.py` (nhánh `Dao_Huy_Hieu/03_ma_hoa_sao_luu` trên GitHub) |
 | D | Nguyễn Viết Vinh - B24DCCC290 | Giám sát, cảnh báo, kiểm thử | Cấu hình Syslog/NTP, bảng quy tắc cảnh báo A01–A13, `giam_sat_canh_bao.py`, `sample_syslog.log`, `ke_hoach_kiem_thu.xlsx` |
@@ -52,7 +52,7 @@ bank_env/
 | Hệ điều hành đã dùng | Windows (theo ảnh chụp màn hình) |
 | Python cho script của C | [Python 3.13 (chạy trực tiếp bằng thư viện chuẩn Python, tùy chọn `pip install cryptography`)] |
 | Python cho script của D | Python 3.8 trở lên; chỉ dùng thư viện chuẩn, không cần cài thêm |
-| Mô hình | `BTL_V4.pkt` |
+| Mô hình | `BTL_V5.pkt` |
 
 ---
 
@@ -122,7 +122,7 @@ Jump Server, Active Directory, FIDO2 và eKYC trong chương của B là **thi�
 ### Cách nhanh
 
 1. Cài Cisco Packet Tracer (bản ghi ở mục 3).
-2. Mở `01_packet_tracer/BTL_V4.pkt`.
+2. Mở `01_packet_tracer/BTL_V5.pkt`.
 3. Đợi các cổng chuyển sang xanh, rồi chạy các bước kiểm tra ở mục 6.
 
 ### Dựng từ đầu
@@ -283,7 +283,7 @@ Script chạy 4 kịch bản (TC-C00 sao lưu 3-2-1 có mã hóa phong bì; TC-C
 
 ### Nhóm I, kiểm tra cuối
 
-Trên một máy khác và thư mục sạch: mở `BTL_V4.pkt`, làm theo README, chạy lại các ca chính; đối chiếu bảng IP trong báo cáo với từng thiết bị; đối chiếu mỗi mã ca với file bằng chứng; xem video và đo độ dài (5–7 phút).
+Trên một máy khác và thư mục sạch: mở `BTL_V5.pkt`, làm theo README, chạy lại các ca chính; đối chiếu bảng IP trong báo cáo với từng thiết bị; đối chiếu mỗi mã ca với file bằng chứng; xem video và đo độ dài (5–7 phút).
 
 ---
 
@@ -346,7 +346,7 @@ Trong phạm vi bài tập, ACL chỉ kiểm soát lưu lượng từ Internet v
 | --- | --- | --- | --- |
 | A | [Microsoft Copilot] | [Hỗ trợ giải thích kiến trúc mạng, VLAN, Trunk, Router-on-a-Stick, ACL; hỗ trợ rà soát bảng IP, README và đề xuất cấu hình Cisco Packet Tracer.] | [Đã trực tiếp cấu hình trên Packet Tracer, kiểm tra bằng các lệnh show vlan brief, show interfaces trunk, show ip interface brief, show access-lists và các bài kiểm thử ping giữa các thiết bị; chỉnh sửa lại địa chỉ IP, cổng kết nối và tên thiết bị để khớp với mô hình thực tế.] |
 | B | [điền] | [điền] | [điền] |
-| C | Gemini (Google)| [Hỗ trợ chuẩn hóa bảng báo cáo và gợi ý khung script mô phỏng mã hóa/sao lưu] | [Đã trực tiếp chỉnh sửa IP/VLAN 20 theo `BTL_V4.pkt`, tự chạy kiểm thử 4 kịch bản (`TC-C00` -> `TC-C03`) và kiểm tra dữ liệu đo RTO thực tế] |
+| C | Gemini (Google)| [Hỗ trợ chuẩn hóa bảng báo cáo và gợi ý khung script mô phỏng mã hóa/sao lưu] | [Đã trực tiếp chỉnh sửa IP/VLAN 20 theo `BTL_V5.pkt`, tự chạy kiểm thử 4 kịch bản (`TC-C00` -> `TC-C03`) và kiểm tra dữ liệu đo RTO thực tế] |
 | D | Claude (Anthropic) | Bản đầu của `giam_sat_canh_bao.py`, bảng quy tắc cảnh báo, kế hoạch kiểm thử, README | [D điền: đã đọc, chỉnh, chạy lại như thế nào] |
 
 Mỗi thành viên phải giải thích được và chạy lại được phần mình nộp.
@@ -357,7 +357,7 @@ Mỗi thành viên phải giải thích được và chạy lại được phầ
 
 - [ ] Báo cáo 12–18 trang nội dung chính (phụ lục cấu hình không tính)
 - [ ] Sơ đồ hệ thống, bảng tài nguyên, IP, quyền
-- [ ] `BTL_V4.pkt` và file cấu hình
+- [ ] `BTL_V5.pkt` và file cấu hình
 - [ ] Script, mã nguồn của từng thành viên
 - [ ] README này (đã điền các chỗ `[điền ...]`)
 - [ ] Bảng kiểm thử có bằng chứng và dấu thời gian
