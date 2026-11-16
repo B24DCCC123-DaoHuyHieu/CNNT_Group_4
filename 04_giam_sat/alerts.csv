@@ -1,0 +1,15 @@
+﻿thoi_diem,muc,quy_tac,thiet_bi,noi_dung,hanh_dong
+2026-11-16 17:32:00,TRUNG BÌNH,A06,Router_Core,cấu hình được thay đổi từ console bởi admin,đối chiếu với yêu cầu thay đổi đã duyệt
+2026-11-16 17:35:15,CAO,A01,Router_Core,3 lần đăng nhập sai từ 192.168.20.20 trong 30 giây (user: admin),"kiểm tra IP nguồn, khóa tạm thời"
+2026-11-16 17:46:00,CAO,A02,Router_Core,đăng nhập thành công (user: admin) từ IP lạ 100.100.100.2,"xác minh người đăng nhập, đổi mật khẩu nếu không nhận ra"
+2026-11-16 17:50:11,TRUNG BÌNH,A03,Router_Core,ACL 110 chặn icmp từ Internet 100.100.100.2 vào VLAN 20 (192.168.20.10),"xác định nguồn, đối chiếu quy tắc ACL"
+2026-11-16 17:50:15,CAO,A03,Router_Core,"5 gói từ 100.100.100.2 bị chặn trong 60 giây, nghi dò quét","xác định nguồn, đối chiếu quy tắc ACL"
+2026-11-16 17:51:00,CAO,A04,Router_Core,ACL 110 chặn icmp từ DMZ 192.168.10.10 vào VLAN 20 (192.168.20.20),"coi Web_App_Server nghi bị xâm nhập: cách ly, kiểm tra"
+2026-11-16 17:52:00,CAO,A05,Router_Core,ACL 110 chặn tcp từ 192.168.20.55 tới CSDL 192.168.20.10 (nguồn không thuộc danh sách được phép),"chặn nguồn, kiểm tra dữ liệu có bị đọc không"
+2026-11-16 17:53:00,CAO,A05,Router_Core,ACL 110 CHO PHÉP tcp từ 192.168.20.77 tới CSDL 192.168.20.10 (nguồn không thuộc danh sách được phép),"chặn nguồn, kiểm tra dữ liệu có bị đọc không"
+2026-11-16 17:55:00,CAO,A07,Switch,cổng GigabitEthernet0/1 (trunk tới Router_Core) chuyển sang down,kiểm tra cáp và thiết bị đầu cuối
+2026-11-16 17:57:00,THẤP,A07,Switch,cổng FastEthernet0/3 chuyển sang down,kiểm tra cáp và thiết bị đầu cuối
+2026-11-16 17:58:00,TRUNG BÌNH,A08,Switch,mất đồng bộ giờ NTP (UNSYNC),kiểm tra show ntp status và kết nối tới NTP-SRV
+2026-11-16 18:20:00,CAO,A06,Router_Core,cấu hình được thay đổi từ console bởi admin (ngoài giờ làm việc),đối chiếu với yêu cầu thay đổi đã duyệt
+2026-11-16 18:24:00,CAO,A06,Switch,cấu hình được thay đổi từ console bởi console (ngoài giờ làm việc),đối chiếu với yêu cầu thay đổi đã duyệt
+2026-11-16 18:40:00,CAO,A09,Router_Core,"không có log từ 18:20:00, đã 20 phút so với mốc 18:40:00",kiểm tra thiết bị và đường tới SYSLOG-SRV; có thể log bị tắt
