@@ -14,7 +14,7 @@ Các chỗ ghi `[điền ...]` là thông tin README này chưa biết; thành v
 
 | Thành viên | Họ tên | Mảng | Sản phẩm kỹ thuật riêng |
 | --- | --- | --- | --- |
-| A | [điền] | Kiến trúc và mạng | `BTL_V4.pkt`: VLAN, trunk, router-on-a-stick, ACL, bảng IP, sơ đồ hệ thống |
+| A | [Lữ Trọng Đại] | Kiến trúc và mạng | `BTL_V4.pkt`: VLAN, trunk, router-on-a-stick, ACL, bảng IP, sơ đồ hệ thống |
 | B | [điền] | Xác thực và phân quyền (IAM, RBAC, phiên) | Thiết kế IAM, ma trận RBAC, chính sách xác thực và quản lý phiên; [điền file/script mô phỏng MFA nếu có] |
 | C | Đào Huy Hiệu | Mã hóa, quản lý khóa, sao lưu, phục hồi | `backup_engine.py`, `restore_engine.py`, `kms_manager.py`, `mock_data_gen.py`, `test_scenarios.py` (nhánh `Dao_Huy_Hieu/03_ma_hoa_sao_luu` trên GitHub) |
 | D | Nguyễn Viết Vinh - B24DCCC290 | Giám sát, cảnh báo, kiểm thử | Cấu hình Syslog/NTP, bảng quy tắc cảnh báo A01–A13, `giam_sat_canh_bao.py`, `sample_syslog.log`, `ke_hoach_kiem_thu.xlsx` |
@@ -48,7 +48,7 @@ bank_env/
 
 | Thành phần | Phiên bản |
 | --- | --- |
-| Cisco Packet Tracer | [điền, xem Help > About Packet Tracer] |
+| Cisco Packet Tracer | [9.0.1.0858] |
 | Hệ điều hành đã dùng | Windows (theo ảnh chụp màn hình) |
 | Python cho script của C | [Python 3.13 (chạy trực tiếp bằng thư viện chuẩn Python, tùy chọn `pip install cryptography`)] |
 | Python cho script của D | Python 3.8 trở lên; chỉ dùng thư viện chuẩn, không cần cài thêm |
@@ -63,8 +63,8 @@ Ba vùng mạng, một router làm cổng trung tâm (router-on-a-stick) và m�
 | Vùng | VLAN | Mạng | Gateway | Thiết bị |
 | --- | --- | --- | --- | --- |
 | Internet | – | 100.100.100.0/24 | 100.100.100.1 (Router_Core G0/1) | PC_KhachHang |
-| DMZ | 10 | 192.168.10.0/24 | 192.168.10.1 (G0/0.10) | Web_App_Server |
-| Internal | 20 | 192.168.20.0/24 | 192.168.20.1 (G0/0.20) | PC_IT_Admin, Database_Server, NTP-SRV, SYSLOG-SRV |
+| DMZ | 10 | 192.168.10.0/24 | 192.168.10.1 (G0/0.10) | Web_Server |
+| Internal | 20 | 192.168.20.0/24 | 192.168.20.1 (G0/0.20) | PC_Admin, Database_Server, NTP-SRV, SYSLOG-SRV |
 
 ### Bảng tài nguyên và IP
 
@@ -73,13 +73,14 @@ Ba vùng mạng, một router làm cổng trung tâm (router-on-a-stick) và m�
 | Router_Core (2911) | – | G0/1 tới PC_KhachHang | 100.100.100.1/24 | |
 | | DMZ | G0/0.10 (dot1Q 10) | 192.168.10.1/24 | |
 | | Internal | G0/0.20 (dot1Q 20) | 192.168.20.1/24 | |
-| Switch (2960) | – | Gig0/1 trunk tới Router_Core G0/0 | | |
+| Switch_Central (2960) | – | Gig0/1 trunk tới Router_Core G0/0 | | |
 | PC_KhachHang | Internet | Fa0 | 100.100.100.2/24 | 100.100.100.1 |
-| Web_App_Server | DMZ (10) | Switch Fa0/2 | 192.168.10.10/24 | 192.168.10.1 |
-| Database_Server | Internal (20) | Switch Fa0/3 | 192.168.20.10/24 | 192.168.20.1 |
-| PC_IT_Admin | Internal (20) | Switch Fa0/4 | 192.168.20.20/24 | 192.168.20.1 |
-| SYSLOG-SRV | Internal (20) | Switch Fa0/5 | 192.168.20.40/24 | 192.168.20.1 |
-| NTP-SRV | Internal (20) | Switch Fa0/6 | 192.168.20.30/24 | 192.168.20.1 |
+| Web_Server | DMZ (10) | Switch_Central Fa0/2 | 192.168.10.10/24 | 192.168.10.1 |
+| Database_Server | Internal (20) | Switch_Central Fa0/3 | 192.168.20.10/24 | 192.168.20.1 |
+| PC_Admin | Internal (20) | Switch_Central Fa0/4 | 192.168.20.20/24 | 192.168.20.1 |
+| SYSLOG-SRV | Internal (20) | Switch_Central Fa0/5 | 192.168.20.40/24 | 192.168.20.1 |
+| NTP-SRV | Internal (20) | Switch_Central Fa0/6 | 192.168.20.30/24 | 192.168.20.1 |
+| Backup_Server | Internal (20) | Switch_Central Fa0/7 | 192.168.20.50/24 | 192.168.20.1 |
 
 ### Chính sách truy cập (ACL 100 trên Router_Core G0/1, chiều vào)
 
@@ -107,14 +108,14 @@ Jump Server, Active Directory, FIDO2 và eKYC trong chương của B là **thi�
 ### Cách nhanh
 
 1. Cài Cisco Packet Tracer (bản ghi ở mục 3).
-2. Mở `01_packet_tracer/BTL_V1.pkt`.
+2. Mở `01_packet_tracer/BTL_V4.pkt`.
 3. Đợi các cổng chuyển sang xanh, rồi chạy các bước kiểm tra ở mục 6.
 
 ### Dựng từ đầu
 
-Thiết bị: 1 Router 2911 (đặt tên `Router_Core`), 1 Switch 2960, 1 PC (`PC_KhachHang`), 1 PC (`PC_IT_Admin`), 4 Server-PT (`Web_App_Server`, `Database_Server`, `SYSLOG-SRV`, `NTP-SRV`). Nối cáp theo bảng IP ở mục 4, đặt IP tĩnh và gateway cho từng máy.
+Thiết bị: 1 Router 2911 (đặt tên `Router_Core`), 1 Switch 2960 (đặt tên `Switch_Central`), 1 PC (`PC_KhachHang`), 1 PC (`PC_Admin`), 5 Server-PT (`Web_Server`, `Database_Server`, `SYSLOG-SRV`, `NTP-SRV`, `Backup_Server`). Nối cáp theo bảng IP ở mục 4, đặt IP tĩnh và gateway cho từng máy.
 
-**Switch (VLAN và trunk):**
+**Switch_Central (VLAN và trunk):**
 
 ```text
 enable
@@ -126,7 +127,7 @@ vlan 20
 interface fa0/2
  switchport mode access
  switchport access vlan 10
-interface range fa0/3 - 6
+interface range fa0/3 - 7
  switchport mode access
  switchport access vlan 20
 interface gi0/1
@@ -159,7 +160,7 @@ access-list 100 permit tcp any host 192.168.10.10 eq 443
 access-list 100 permit icmp any host 192.168.10.10 echo
 access-list 100 deny ip any any log
 interface g0/1
- ip access-group 100 in
+ip access-group 100 in
 ```
 
 Dòng cuối của ACL có từ khóa `log` (khác bản trước) để Router sinh log mỗi khi chặn gói; phần giám sát cần log này.
@@ -228,12 +229,12 @@ Mở Desktop > Command Prompt trên từng máy:
 
 | Từ máy | Lệnh | Kết quả mong đợi |
 | --- | --- | --- |
-| PC_IT_Admin | `ping 192.168.20.10` | Thông |
-| PC_IT_Admin | `ping 192.168.10.10` | Thông (gói đầu có thể timeout do ARP) |
+| PC_Admin | `ping 192.168.20.10` | Thông |
+| PC_Admin | `ping 192.168.10.10` | Thông (gói đầu có thể timeout do ARP) |
 | PC_KhachHang | `ping 192.168.10.10` | Thông (ACL cho phép) |
 | PC_KhachHang | `ping 192.168.20.10` | Destination host unreachable (bị ACL chặn) |
 | PC_KhachHang | `ping 192.168.20.20` | Destination host unreachable |
-| Switch | `show vlan brief`, `show interfaces trunk` | Đúng VLAN theo bảng IP; trunk mang VLAN 10 và 20 |
+| Switch_Central | `show vlan brief`, `show interfaces trunk` | Đúng VLAN theo bảng IP; trunk mang VLAN 10 và 20 |
 | Router_Core | `show access-lists`, `show ip interface brief` | Số `matches` của luật deny tăng; các interface up |
 
 Gói đầu tiên khi ping giữa hai VLAN có thể bị timeout vì router cần hỏi ARP; đó là hiện tượng bình thường (xem giải thích "25% loss" trong báo cáo).
@@ -268,7 +269,7 @@ Script chạy 4 kịch bản (TC-C00 sao lưu 3-2-1 có mã hóa phong bì; TC-C
 
 ### Nhóm I, kiểm tra cuối
 
-Trên một máy khác và thư mục sạch: mở `BTL_V1.pkt`, làm theo README, chạy lại các ca chính; đối chiếu bảng IP trong báo cáo với từng thiết bị; đối chiếu mỗi mã ca với file bằng chứng; xem video và đo độ dài (5–7 phút).
+Trên một máy khác và thư mục sạch: mở `BTL_V4.pkt`, làm theo README, chạy lại các ca chính; đối chiếu bảng IP trong báo cáo với từng thiết bị; đối chiếu mỗi mã ca với file bằng chứng; xem video và đo độ dài (5–7 phút).
 
 ---
 
@@ -276,7 +277,7 @@ Trên một máy khác và thư mục sạch: mở `BTL_V1.pkt`, làm theo READM
 
 | Nhóm | Tình trạng |
 | --- | --- |
-| N | Đã có ảnh chụp ping và `show access-lists` trong báo cáo nháp: khách vào được Web_App_Server, bị chặn khỏi Database_Server và PC_IT_Admin. Chưa ghi vào bảng kiểm thử chung |
+| N | Đã có ảnh chụp ping và `show access-lists` trong báo cáo nháp: khách vào được Web_Server, bị chặn khỏi Database_Server và PC_Admin. Chưa ghi vào bảng kiểm thử chung |
 | X | [B điền] |
 | C | Báo cáo nháp ghi TC-C00 đến TC-C03 đạt; RTO đo được 1,5328 giây so với mục tiêu 3.600 giây. Dữ liệu đo gốc cần nộp kèm (xem mục 8, điểm 6) |
 | D | Script đã chạy đúng trên log mẫu; chưa chạy trên log thật từ SYSLOG-SRV |
@@ -286,11 +287,11 @@ Trên một máy khác và thư mục sạch: mở `BTL_V1.pkt`, làm theo READM
 
 ## 8. Vấn đề đã biết cần nhóm thống nhất trước khi nộp
 
-1. **Địa chỉ Syslog/NTP:** bản thử nghiệm đầu dùng 10.10.99.10 và 10.10.99.20 (VLAN 99), mô hình cuối dùng 192.168.20.40 và 192.168.20.30 (VLAN 20). Kiểm tra `show running-config` của Router_Core và Switch xem còn cấu hình cũ không.
+1. **Địa chỉ Syslog/NTP:** bản thử nghiệm đầu dùng 10.10.99.10 và 10.10.99.20 (VLAN 99), mô hình cuối dùng 192.168.20.40 và 192.168.20.30 (VLAN 20). Kiểm tra `show running-config` của Router_Core và Switch_Central xem còn cấu hình cũ không.
 2. **ACL 100 chưa có `log`:** nếu không thêm `log` ở dòng deny (mục 5), Router không sinh log ACL và các ca D04, A03 không có dữ liệu.
-3. **DMZ sang VLAN 20 chưa bị lọc:** ACL chỉ đặt ở G0/1 chiều vào, nên Web_App_Server vẫn ping được cả Database_Server lẫn PC_IT_Admin. A cần quyết định: thêm ACL ở `g0/0.10` (chỉ cho Web_App_Server tới Database_Server theo cổng cần thiết) hoặc ghi rõ đây là phạm vi chưa làm. Quyết định này ảnh hưởng ca N08, D07 và quy tắc A04.
-4. **Backup_Server 192.168.20.50:** báo cáo của C ghi VLAN 20 ở chỗ này và VLAN 30 ở chỗ khác, và thiết bị này **không có** trong `BTL_V1.pkt` (chỉ là thư mục mô phỏng trong script). Cần thống nhất và ghi vào phần giả định.
-5. **Bảng IP và cổng:** bảng của A ghi Switch cắm F0/1 và PC_KhachHang vào G0/0; sơ đồ và cấu hình thực tế là Switch Gig0/1 ↔ Router G0/0 (trunk), PC_KhachHang ↔ Router G0/1. README này dùng theo cấu hình thực tế.
+3. **DMZ sang VLAN 20 chưa bị lọc:** ACL chỉ đặt ở G0/1 chiều vào, nên Web_Server vẫn ping được cả Database_Server lẫn PC_Admin. A cần quyết định: thêm ACL ở `g0/0.10` (chỉ cho Web_Server tới Database_Server theo cổng cần thiết) hoặc ghi rõ đây là phạm vi chưa làm. Quyết định này ảnh hưởng ca N08, D07 và quy tắc A04.
+4. **Backup_Server 192.168.20.50:** hiện đã được bổ sung vào VLAN 20 và kết nối qua Switch_Central Fa0/7.
+5. **Bảng IP và cổng:** bảng của A ghi Switch_Central cắm F0/1 và PC_KhachHang vào G0/0; sơ đồ và cấu hình thực tế là Switch Gig0/1 ↔ Router G0/0 (trunk), PC_KhachHang ↔ Router G0/1. README này dùng theo cấu hình thực tế.
 6. **Bằng chứng của C không khớp nhau:** Hình 1 ghi thời điểm 19:49:10 và văn bản ghi RTO 1,5328 giây, nhưng ảnh console trong hình hiển thị 2026-11-12 20:28:48 và RTO 0,0141 giây. Cần chạy lại một lần, rồi dùng cùng một lần chạy cho ảnh, log và bảng kết quả, và nộp kèm dữ liệu đo gốc.
 7. **Tên thiết bị chưa thống nhất:** Switch1 và Switch_Central, Web_Server và Web_App_Server, PC_Admin và PC_IT_Admin. Chọn một bộ tên theo `.pkt` và dùng thống nhất ở báo cáo, bảng IP, script.
 8. **Log của C chưa đưa vào script của D:** log của C có dạng `<134>2026-11-12 ... Event=[BACKUP_OK] Severity=6` nên script giám sát hiện bỏ qua. Quy tắc cảnh báo sao lưu (A10, A11) mới là thiết kế.
@@ -322,7 +323,7 @@ Trên một máy khác và thư mục sạch: mở `BTL_V1.pkt`, làm theo READM
 
 | Thành viên | Công cụ AI | Phần được hỗ trợ | Cách bạn đã kiểm tra và chỉnh |
 | --- | --- | --- | --- |
-| A | [điền] | [điền] | [điền] |
+| A | [Microsoft Copilot] | [Hỗ trợ giải thích kiến trúc mạng, VLAN, Trunk, Router-on-a-Stick, ACL; hỗ trợ rà soát bảng IP, README và đề xuất cấu hình Cisco Packet Tracer.] | [Đã trực tiếp cấu hình trên Packet Tracer, kiểm tra bằng các lệnh show vlan brief, show interfaces trunk, show ip interface brief, show access-lists và các bài kiểm thử ping giữa các thiết bị; chỉnh sửa lại địa chỉ IP, cổng kết nối và tên thiết bị để khớp với mô hình thực tế.] |
 | B | [điền] | [điền] | [điền] |
 | C | Gemini (Google)| [Hỗ trợ chuẩn hóa bảng báo cáo và gợi ý khung script mô phỏng mã hóa/sao lưu] | [Đã trực tiếp chỉnh sửa IP/VLAN 20 theo `BTL_V4.pkt`, tự chạy kiểm thử 4 kịch bản (`TC-C00` -> `TC-C03`) và kiểm tra dữ liệu đo RTO thực tế] |
 | D | Claude (Anthropic) | Bản đầu của `giam_sat_canh_bao.py`, bảng quy tắc cảnh báo, kế hoạch kiểm thử, README | [D điền: đã đọc, chỉnh, chạy lại như thế nào] |
