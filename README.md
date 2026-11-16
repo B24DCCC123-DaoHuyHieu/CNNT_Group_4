@@ -87,7 +87,7 @@ Ba vùng mạng, một router làm cổng trung tâm (router-on-a-stick) và m�
 Backup_Server (192.168.20.50)
 
 Vai trò:
-Lưu trữ dữ liệu sao lưu từ Database_Server phục vụ các chức năng Backup/Restore của nhóm C.
+Là đích nhận dữ liệu sao lưu từ Database_Server và lưu trữ các bản backup phục vụ chức năng Backup/Restore của C.
 
 Vị trí:
 VLAN 20 (Internal)
