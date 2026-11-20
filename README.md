@@ -14,7 +14,7 @@ Dự án mô phỏng hạ tầng của một ngân hàng số giả định trê
 | --- | --- | --- | --- |
 | A | Lữ Trọng Đại – B24DCCC045 | Kiến trúc và mạng | `BTL_V5.pkt`: VLAN, trunk, router-on-a-stick, ACL, bảng IP, sơ đồ hệ thống |
 | B | [B bổ sung] | Xác thực và phân quyền (IAM, RBAC, phiên) | Thiết kế IAM, ma trận RBAC, chính sách xác thực và quản lý phiên |
-| C | Đào Huy Hiệu | Mã hóa, quản lý khóa, sao lưu, phục hồi | `backup_engine.py`, `restore_engine.py`, `kms_manager.py`, `mock_data_gen.py`, `test_scenarios.py` |
+| C | Đào Huy Hiệu - B24DCCC123 | Mã hóa, quản lý khóa, sao lưu, phục hồi | `backup_engine.py`, `restore_engine.py`, `kms_manager.py`, `mock_data_gen.py`, `test_scenarios.py` |
 | D | Nguyễn Viết Vinh – B24DCCC290 | Giám sát, cảnh báo, kiểm thử | Cấu hình Syslog/NTP, bộ quy tắc cảnh báo A01–A13, `giam_sat_canh_bao.py`, `sample_syslog.log`, `Test_Cases_Monitoring.xlsx` |
 
 ---
@@ -322,7 +322,7 @@ Mỗi thành viên giải thích được và chạy lại được phần mình
 - [x] Bảng kiểm thử nhóm D kèm bằng chứng có dấu thời gian
 - [ ] Phần xác thực, phân quyền và kiểm thử của B
 - [ ] Báo cáo 12–18 trang nội dung chính
-- [ ] Dữ liệu đo gốc RPO/RTO của C
+- [x] Dữ liệu đo gốc RPO/RTO của C
 - [ ] Video demo 5–7 phút
 - [ ] Phiếu đóng góp cá nhân
 - [ ] Khai báo nguồn tham khảo và việc dùng AI (đủ bốn thành viên)
