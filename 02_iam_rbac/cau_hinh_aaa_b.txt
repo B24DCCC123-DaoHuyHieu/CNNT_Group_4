@@ -1,0 +1,39 @@
+! =====================================================================
+! CAU HINH AAA & PHAN QUYEN RBAC 3 CAP TREN ROUTER_CORE - THANH VIEN B
+! =====================================================================
+
+enable
+configure terminal
+
+! 1. Kich hoat mo hinh AAA va xac thuc cuc bo
+aaa new-model
+aaa authentication login default local
+aaa authentication login NHOM4_AUTH local
+aaa authorization exec default local
+aaa authorization exec NHOM4_AUTH local
+aaa authentication enable default enable
+
+! 2. Dat mat khau cho che do dac quyen (Level 15 va Level 5)
+enable secret Matkhau@123
+enable secret level 5 OfficerPass@123
+
+! 3. Tao 3 tai khoan tuong ung 3 vai tro RBAC
+! - SYSADMIN (Cap 15 - Toan quyen he thong)
+username sysadmin privilege 15 secret SysAdmin@2026
+
+! - OFFICER (Cap 5 - Chi xem log va trang thai, bi chan cau hinh)
+username officer privilege 5 secret Officer@2026
+privilege exec level 5 show running-config
+privilege exec level 5 show logging
+privilege exec level 5 show ip interface brief
+
+! - CUSTOMER (Cap 1 - Quyen thap nhat)
+username customer_test privilege 1 secret Cust@2026
+
+! 4. Ap dung xac thuc AAA cho cong quan tri tu xa VTY
+line vty 0 4
+ login authentication default
+ exit
+
+end
+write memory
