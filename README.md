@@ -1,4 +1,4 @@
-# BTL CNNT – Nhóm 4 – Đề tài 16: Thiết kế hạ tầng CNTT an toàn cho ngân hàng số
+# BTL CNNT – Nhóm 13 – Đề tài 16: Thiết kế hạ tầng CNTT an toàn cho ngân hàng số
 
 Học phần: Nhập môn Công nghệ Nền tảng (RIPT1304-20261-01) · Phiên bản README: 1.0 (17/11/2026) · Mô hình: `BTL_V5.pkt`
 
@@ -22,7 +22,7 @@ Dự án mô phỏng hạ tầng của một ngân hàng số giả định trê
 ## 2. Cấu trúc thư mục nộp
 
 ```
-BTL_CNNT_Group_4/
+BTL_CNNT_Group_13/
 ├── README.md
 ├── 01_packet_tracer/
 │   ├── BTL_V5.pkt
